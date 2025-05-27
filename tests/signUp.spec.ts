@@ -66,7 +66,7 @@ test('Спроба реєстрації з невалідними даними',
   await signUp.clickCheckboxAcceptTerm();
   await signUp.verifyCheckboxSubscribe();
   await signUp.verifySighUpButton();
-//   await signUp.clickSignUpButton();
+  await signUp.clickSignUpButton();
 //   await signUp.expectVisible(signUp.nameError, 'Перевірка помилки імені');
 //   await signUp.expectText(signUp.emailError, 'Invalid email', 'Перевірка помилки email');
 //   await signUp.expectText(signUp.passwordError, 'Too short', 'Перевірка помилки пароля');

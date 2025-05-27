@@ -22,7 +22,7 @@ export class SignUp extends BasePage{
         super(page);
         this.logoSignUp=page.locator('form h1');
         this.fieldEmail=page.locator('input[name="email"]');
-        this.fieldName=page.locator('input[name="name"]');
+        this.fieldName=page.locator('text-danger mb-2');
         this.fieldPassword=page.locator('input[name="password"]');
         this.fieldRepeatPassword=page.locator('input[name="confirm-password"]');
         this.checkboxAcceptTerm=page.locator('input[name="toc"]');
