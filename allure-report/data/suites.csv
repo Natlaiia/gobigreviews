@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5660","Спроба реєстрації з невалідними даними","chromium","Wed May 28 22:02:36 EEST 2025","passed","Wed May 28 22:02:42 EEST 2025","Реєстрація","signUp.spec.ts","",""
+"","5967","Можливість зареєструватись через Sign In FaceBook","chromium","Wed May 28 22:02:35 EEST 2025","passed","Wed May 28 22:02:41 EEST 2025","Реєстрація","signUp.spec.ts","",""
+"","13611","Успішна реєстрація з валідними даними","chromium","Wed May 28 22:02:23 EEST 2025","passed","Wed May 28 22:02:36 EEST 2025","Реєстрація","signUp.spec.ts","",""
+"","12222","Посилання на Terms and Conditions працює","chromium","Wed May 28 22:02:23 EEST 2025","passed","Wed May 28 22:02:35 EEST 2025","Реєстрація","signUp.spec.ts","",""
+"","13647","Можливість зареєструватись через Sign In Google","chromium","Wed May 28 22:02:23 EEST 2025","passed","Wed May 28 22:02:36 EEST 2025","Реєстрація","signUp.spec.ts","",""
+"","13294","Посилання на Log In працює","chromium","Wed May 28 22:02:23 EEST 2025","passed","Wed May 28 22:02:36 EEST 2025","Реєстрація","signUp.spec.ts","",""

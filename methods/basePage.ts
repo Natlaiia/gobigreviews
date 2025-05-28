@@ -1,53 +1,66 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
+import { allure } from 'allure-playwright';
  
 export class BasePage {
   readonly page: Page;
+  protected errors: string[] = [];
  
   constructor(page: Page) {
     this.page = page;
   }
  
-  async clickElement(element: Locator, stepName = 'Click Element') {
+  getErrors(): string[] {
+    return this.errors;
+  }
+ 
+  async step(name: string, fn: () => Promise<void>) {
     try {
-      await expect(element).toBeVisible();
-      await element.click();
+      await test.step(name, fn);
     } catch (error) {
-      console.error(`[${stepName}] Помилка при кліку:`, error);
+      const msg = `[${name}] ❌ Step failed: ${error}`;
+      console.error(msg);
+      this.errors.push(msg);
     }
   }
  
+  async clickElement(element: Locator, stepName = 'Click Element') {
+    await this.step(stepName, async () => {
+      await expect(element).toBeVisible();
+      await element.click();
+    });
+  }
+ 
   async fillInput(element: Locator, value: string, stepName = 'Fill Input') {
-    try {
+    await this.step(stepName, async () => {
       await expect(element).toBeVisible();
       await expect(element).toBeEnabled();
       await element.fill(value);
       await expect(element).toHaveValue(value);
-    } catch (error) {
-      console.error(`[${stepName}] Помилка при введенні "${value}":`, error);
-    }
+    });
   }
  
   async expectVisible(element: Locator, stepName = 'Expect Visible') {
-    try {
+    await this.step(stepName, async () => {
       await expect(element).toBeVisible();
-    } catch (error) {
-      console.error(`[${stepName}] Елемент не відображається:`, error);
-    }
+    });
   }
  
   async expectHasAttribute(element: Locator, attr: string, value: string, stepName = 'Expect Attribute') {
-    try {
+    await this.step(stepName, async () => {
       await expect(element).toHaveAttribute(attr, value);
-    } catch (error) {
-      console.error(`[${stepName}] Атрибут "${attr}" не дорівнює "${value}":`, error);
-    }
+    });
   }
  
   async expectText(element: Locator, text: string, stepName = 'Expect Text') {
-    try {
+    await this.step(stepName, async () => {
       await expect(element).toHaveText(text);
-    } catch (error) {
-      console.error(`[${stepName}] Текст не відповідає "${text}":`, error);
+    });
+  }
+ 
+  async assertAll() {
+    if (this.errors.length > 0) {
+      allure.attachment('Помилки soft assert', this.errors.join('\n'), 'text/plain');
+      throw new Error(`Soft Assert помилки:\n${this.errors.join('\n')}`);
     }
   }
 }

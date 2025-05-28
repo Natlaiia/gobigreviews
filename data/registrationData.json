@@ -1,0 +1,13 @@
+{
+  "validUser": {
+    "name": "Test Name",
+    "email": "letoyi7925@betzenn.com",
+    "password": "1234Niko+"
+  },
+  "invalidUser": {
+    "name": "",
+    "email": "invalid-email",
+    "password": "123",
+    "repeatPassword": "321"
+  }
+}

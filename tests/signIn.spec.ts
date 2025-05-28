@@ -3,6 +3,8 @@ import { HomePage } from '../pages/homePage';
 import { Header } from '../pages/header';
 import { SignIn } from '../pages/signIn';
 import { SocialAuth } from '../pages/socialAuth';
+const registrationData = require('../data/registrationData.json'); // JSON варіант
+import { generateRandomInvalidData } from '../utils/generate'; //Faker варіант
 
 test.describe('Авторизація', () => {
     let homePage: HomePage;
@@ -18,25 +20,31 @@ test.describe('Авторизація', () => {
         await homePage.visit();
         await homePage.verifyTitle();
         await header.clickSignIn();
+        const registrationData = require('../data/registrationData.json');
     });
 
         test('Успішна авторизація', async({page})=>{
-            await signIn.fillFieldEmail('letoyi7925@betzenn.com');
-            await signIn.fillFieldPassword('Test1234+');
+            const { email, password } = registrationData.validUser; //JSON варіант
+            await signIn.fillFieldEmail(email);
+            await signIn.fillFieldPassword(password);
             await signIn.clickSignInButton();
             await signIn.verifyUserMenu();
         });
 
         test('Авторизація при вводі не існуючого email', async({page})=>{
-            await signIn.fillFieldEmail('letoyi7925betzenn.com');
-            await signIn.fillFieldPassword('Test1234+');
+            const user = generateRandomInvalidData(); //faker варіант
+            const { password } = registrationData.validUser; // JSON варіант
+            await signIn.fillFieldEmail(user.email);
+            await signIn.fillFieldPassword(password);
             await signIn.clickSignInButton();
             await signIn.errorEmailText('The email field must be a valid email address.');
         });
 
          test('Авторизація при вводі не валідного паролю', async({page})=>{
-            await signIn.fillFieldEmail('letoyi7925@betzenn.com');
-            await signIn.fillFieldPassword('Test12348+');
+            const user = generateRandomInvalidData(); //faker варіант
+            const { email } = registrationData.validUser; //JSON варіант
+            await signIn.fillFieldEmail(email);
+            await signIn.fillFieldPassword(user.password);
             await signIn.clickSignInButton();
             await signIn.errorPasswordText('Invalid email or password');
         });

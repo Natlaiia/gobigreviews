@@ -1,5 +1,5 @@
 import {expect, Page, Locator} from '@playwright/test';
-import { BasePage } from '../methods/basePage';
+import { BasePage } from '../methods/basePageOld';
 export class SocialAuth {
     readonly page:Page;
     readonly basePage:BasePage;

@@ -1,5 +1,5 @@
 import {Page, Locator} from '@playwright/test';
-import { BasePage } from '../methods/basePage';
+import { BasePage } from '../methods/basePageOld';
 export class SignUp extends BasePage{
     readonly logoSignUp:Locator;
     readonly fieldName:Locator;
@@ -22,7 +22,7 @@ export class SignUp extends BasePage{
         super(page);
         this.logoSignUp=page.locator('form h1');
         this.fieldEmail=page.locator('input[name="email"]');
-        this.fieldName=page.locator('text-danger mb-2');
+        this.fieldName=page.locator('input[name="name"]');
         this.fieldPassword=page.locator('input[name="password"]');
         this.fieldRepeatPassword=page.locator('input[name="confirm-password"]');
         this.checkboxAcceptTerm=page.locator('input[name="toc"]');
